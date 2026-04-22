@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DOE Test Cognitivo</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f0f3fa;
+    --card: #ffffff;
+    --primary: #2d5be3;
+    --primary-dark: #1a3eb5;
+    --accent: #e84545;
+    --text: #1a2240;
+    --muted: #5a6282;
+    --border: #dde2f0;
+    --success: #1a9e4a;
+    --number-bg: #eaf0ff;
+    --number-hover: #c8d9ff;
+    --radius: 14px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 20px 16px 80px;
+  }
+
+  .card {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: 0 8px 32px rgba(30,50,120,0.10);
+    max-width: 680px;
+    width: 100%;
+    padding: 28px 24px;
+  }
+
+  /* ─── INTRO ─── */
+  .intro-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 16px;
+    letter-spacing: -0.3px;
+  }
+
+  .rules-list {
+    list-style: none;
+    margin-bottom: 20px;
+  }
+  .rules-list li {
+    padding: 7px 0;
+    font-size: 15px;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .rules-list li::before {
+    content: '→';
+    color: var(--primary);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .conditions-box {
+    background: #eef2ff;
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--primary-dark);
+    margin-bottom: 20px;
+    line-height: 1.7;
+  }
+
+  .legend-box {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    margin-bottom: 28px;
+  }
+  .legend-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .sample-std {
+    width: 52px; height: 52px;
+    border-radius: 10px;
+    background: #eaf1ff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; font-family: Arial; color: #1a2240;
+    box-shadow: 0 2px 8px rgba(45,92,227,0.10);
+  }
+  .sample-alt {
+    width: 52px; height: 52px;
+    border-radius: 10px;
+    background: #fff0f0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 32px; font-family: 'Courier New'; color: #e84545;
+    box-shadow: 0 2px 8px rgba(232,69,69,0.12);
+  }
+
+  /* ─── BOTTONE PRINCIPALE ─── */
+  .btn-primary {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    letter-spacing: 0.2px;
+    transition: background 0.18s, transform 0.12s;
+    box-shadow: 0 4px 16px rgba(45,91,227,0.22);
+  }
+  .btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); }
+  .btn-primary:active { transform: translateY(0); }
+
+  /* sticky start */
+  .btn-sticky {
+    position: fixed;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 32px);
+    max-width: 420px;
+    z-index: 999;
+    padding: 15px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 14px;
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    box-shadow: 0 6px 20px rgba(45,91,227,0.35);
+    transition: background 0.18s;
+  }
+  .btn-sticky:hover { background: var(--primary-dark); }
+
+  /* ─── INFO CONDIZIONE ─── */
+  #info {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--primary-dark);
+    background: #eef2ff;
+    border-radius: 10px;
+    padding: 12px 16px;
+    line-height: 1.8;
+    margin-bottom: 16px;
+    white-space: pre-line;
+  }
+
+  /* ─── PROGRESS ─── */
+  #progressContainer {
+    margin-bottom: 16px;
+    display: none;
+  }
+  #progressBar {
+    width: 100%;
+    height: 7px;
+    background: var(--border);
+    border-radius: 99px;
+    overflow: hidden;
+    margin-bottom: 5px;
+  }
+  #progressFill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--primary), #6b94ff);
+    border-radius: 99px;
+    transition: width 0.22s ease-out;
+  }
+  #progressText {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  /* ─── GRIGLIA ─── */
+  #instruction {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--muted);
+    margin-bottom: 12px;
+    text-align: center;
+  }
+
+  #grid {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+
+  .num-btn {
+    aspect-ratio: 1;
+    font-size: 15px;
+    font-family: 'DM Mono', monospace;
+    font-weight: 500;
+    border: none;
+    border-radius: 9px;
+    background: var(--number-bg);
+    color: var(--text);
+    cursor: pointer;
+    transition: background 0.14s, transform 0.1s;
+  }
+  .num-btn:hover { background: var(--number-hover); transform: scale(1.07); }
+  .num-btn:active { transform: scale(0.97); }
+
+  @media (max-width: 560px) {
+    #grid { grid-template-columns: repeat(5, 1fr); gap: 5px; }
+    .num-btn { font-size: 17px; }
+    .card { padding: 18px 14px; }
+  }
+
+  /* ─── AREA FINALE ─── */
+  #finalArea { display: none; margin-top: 10px; }
+
+  .congrats-msg {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  /* ─── FORM RISPOSTE ─── */
+  #finalQuestions {
+    background: #f5f7fb;
+    padding: 18px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .field-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 5px;
+  }
+  .field-group input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    font-size: 15px;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: white;
+    transition: border-color 0.15s;
+  }
+  .field-group input:focus {
+    outline: none;
+    border-color: var(--primary);
+  }
+
+  /* ─── PANEL RISULTATO ─── */
+  #panel {
+    display: none;
+    margin-top: 20px;
+    background: #eef2ff;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+  }
+  #finalTime {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin-bottom: 16px;
+    font-family: 'DM Mono', monospace;
+  }
+  #sendStatus {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 14px;
+    min-height: 20px;
+    color: var(--muted);
+  }
+  #sendStatus.ok { color: var(--success); }
+  #sendStatus.err { color: var(--accent); }
+
+  .btn-download {
+    width: 100%;
+    padding: 13px;
+    background: linear-gradient(135deg, #1a9e4a, #22c55e);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    box-shadow: 0 4px 12px rgba(26,158,74,0.22);
+    transition: opacity 0.15s;
+  }
+  .btn-download:hover { opacity: 0.9; }
+</style>
+</head>
+<body>
+
+<div class="card">
+
+  <!-- ══ INTRO ══ -->
+  <div id="intro">
+    <h2 class="intro-title">📋 Regole del Test</h2>
+
+    <ul class="rules-list">
+      <li>Premi i numeri nell'ordine richiesto</li>
+      <li>Cerca di essere veloce ma preciso</li>
+      <li>Evita distrazioni durante il test</li>
+      <li>Il cronometro parte al primo clic sul numero</li>
+      <li>Non interrompere una volta iniziato</li>
+    </ul>
+
+    <div class="conditions-box">
+      <strong>Condizioni sperimentali:</strong><br>
+      • Input visivi: Si / No<br>
+      • Ordine: Crescente (1→50) o Decrescente (50→1)
+    </div>
+
+    <div class="legend-box">
+      <div class="legend-item">
+        <div class="sample-std">7</div>
+        Input visivo Standard
+      </div>
+      <div class="legend-item">
+        <div class="sample-alt">7</div>
+        Input visivo Alterato
+      </div>
+    </div>
+
+    <button class="btn-sticky" onclick="showTest()">Inizia test →</button>
+  </div>
+
+  <!-- ══ FASE TEST ══ -->
+  <div id="testPhase" style="display:none;">
+
+    <div id="info"></div>
+
+    <div id="progressContainer">
+      <div id="progressBar"><div id="progressFill"></div></div>
+      <p id="progressText"></p>
+    </div>
+
+    <button class="btn-primary" id="startBtn" onclick="startTest()" style="display:none; margin-bottom:16px;">
+      ▶ Avvia numerazione
+    </button>
+
+    <div id="test" style="display:none;">
+      <p id="instruction"></p>
+      <div id="grid"></div>
+    </div>
+
+    <!-- ── AREA FINALE ── -->
+    <div id="finalArea">
+
+      <p class="congrats-msg" id="congrats"></p>
+
+      <!-- Form domande finali -->
+      <div id="finalQuestions">
+        <div class="field-group">
+          <label>Hai assunto caffeina nelle ultime 2 ore?</label>
+          <input id="caffeinaInput" type="text" maxlength="3" placeholder="si / no">
+        </div>
+        <div class="field-group">
+          <label>Sesso</label>
+          <input id="sessoInput" type="text" maxlength="1" placeholder="M / F">
+        </div>
+        <div class="field-group">
+          <label>Età <span style="font-weight:400; color:var(--muted)">(G = ≤30 anni · A = >30 anni)</span></label>
+          <input id="etaInput" type="text" maxlength="1" placeholder="G / A">
+        </div>
+        <button class="btn-primary" id="confirmAnswers">Conferma risposte</button>
+      </div>
+
+      <!-- Panel risultato -->
+      <div id="panel">
+        <div id="finalTime"></div>
+        <div id="sendStatus"></div>
+        <button class="btn-download" onclick="downloadCSV()">📥 Scarica dati CSV</button>
+      </div>
+
+    </div>
+  </div>
+
+</div><!-- /card -->
+
+<script>
+// ══════════════════════════════════════════════
+//  CONFIGURAZIONE — incolla qui il tuo URL Apps Script
+// ══════════════════════════════════════════════
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxV9U0dpV0lF2gCcG_yJPnPPuZTB-gQTI3J9Rl4u7pGUk7Gane_hfHqgWzPOVmVAg8f/exec";
+
+// ══════════════════════════════════════════════
+const colori    = ["red","blue","green","#7b00d4","#e07b00"];
+const dimensioni= ["16px","20px","26px","32px","40px"];
+const fonts     = ["Arial","Courier New","Georgia","Verdana","Tahoma"];
+const TOTALE    = 50;
+
+let startTime = null;
+let current;
+let condizione;
+let dati = [];
+
+// Assegna condizione al caricamento
+document.addEventListener("DOMContentLoaded", () => {
+  condizione = {
+    direzione:   Math.random() < 0.5 ? "up" : "down",
+    inputVisivi: Math.random() < 0.5 ? "no"  : "si"
+  };
+});
+
+function showTest() {
+  document.getElementById("intro").style.display     = "none";
+  document.getElementById("testPhase").style.display = "block";
+  document.getElementById("startBtn").style.display  = "block";
+
+  const info = document.getElementById("info");
+  info.innerText =
+    "Condizione assegnata:\n" +
+    "Input visivi: " + (condizione.inputVisivi === "si" ? "Sì" : "No") + "\n" +
+    "Ordine: " + (condizione.direzione === "up"
+      ? "Crescente (1 → 50)"
+      : "Decrescente (50 → 1)");
+}
+
+function startTest() {
+  document.getElementById("startBtn").style.display      = "none";
+  document.getElementById("test").style.display          = "block";
+  document.getElementById("progressContainer").style.display = "block";
+  document.getElementById("progressFill").style.width    = "0%";
+  document.getElementById("progressText").innerText      = "Nessun numero ancora cliccato";
+
+  startTime = null;
+  current   = condizione.direzione === "up" ? 1 : 50;
+
+  document.getElementById("instruction").innerText =
+    condizione.direzione === "up"
+      ? "Trova i numeri da 1 a 50 in ordine crescente"
+      : "Trova i numeri da 50 a 1 in ordine decrescente";
+
+  // Griglia
+  const numeri = Array.from({length: 50}, (_, i) => i + 1).sort(() => Math.random() - 0.5);
+  const grid   = document.getElementById("grid");
+  grid.innerHTML = "";
+
+  numeri.forEach(n => {
+    const btn = document.createElement("button");
+    btn.textContent = n;
+    btn.className   = "num-btn";
+    if (condizione.inputVisivi === "si") {
+      btn.style.color      = colori[Math.floor(Math.random() * colori.length)];
+      btn.style.fontSize   = dimensioni[Math.floor(Math.random() * dimensioni.length)];
+      btn.style.fontFamily = fonts[Math.floor(Math.random() * fonts.length)];
+    }
+    btn.onclick = () => handleClick(n, btn);
+    grid.appendChild(btn);
+  });
+}
+
+function handleClick(n, btn) {
+  if (n !== current) return;
+
+  if (startTime === null) startTime = performance.now();
+
+  btn.style.visibility = "hidden";
+
+  const cliccati = condizione.direzione === "up" ? n : (TOTALE + 1 - n);
+  const percent  = (cliccati / TOTALE) * 100;
+  document.getElementById("progressFill").style.width  = percent + "%";
+  document.getElementById("progressText").innerText    =
+    "Progresso: " + cliccati + "/" + TOTALE + " – ultimo numero: " + n;
+
+  current = condizione.direzione === "up" ? current + 1 : current - 1;
+
+  // ── FINE TEST ──
+  if (current === 51 || current === 0) {
+    const tempo = ((performance.now() - startTime) / 1000).toFixed(2);
+    window.tempoFinale = tempo;
+
+    document.getElementById("test").style.display          = "none";
+    document.getElementById("progressContainer").style.display = "none";
+    document.getElementById("finalArea").style.display     = "block";
+    document.getElementById("congrats").innerHTML          = "🎉 Ottimo lavoro! Test completato.";
+
+    // Handler conferma risposte
+    document.getElementById("confirmAnswers").onclick = function() {
+      const risposte = validateFinalAnswers();
+      if (!risposte) return;
+
+      const record = {
+        tempo:       window.tempoFinale,
+        direzione:   condizione.direzione,
+        inputVisivi: condizione.inputVisivi,
+        caffeina:    risposte.caffeina,
+        sesso:       risposte.sesso,
+        eta:         risposte.eta,
+        timestamp:   new Date().toLocaleString("it-IT")
+      };
+      dati.push(record);
+
+      document.getElementById("finalQuestions").style.display = "none";
+      document.getElementById("panel").style.display          = "block";
+      document.getElementById("finalTime").innerHTML =
+        "⏱ " + window.tempoFinale + "s";
+
+      inviaDati(record);
+    };
+  }
+}
+
+// ── VALIDAZIONE ──
+function validateFinalAnswers() {
+  const c = document.getElementById("caffeinaInput").value.trim().toLowerCase();
+  const s = document.getElementById("sessoInput").value.trim().toLowerCase();
+  const e = document.getElementById("etaInput").value.trim().toLowerCase();
+  if (!["si","no"].includes(c)) { alert("Rispondi 'si' o 'no' per la caffeina"); return null; }
+  if (!["m","f"].includes(s))   { alert("Rispondi 'M' o 'F' per il sesso");      return null; }
+  if (!["g","a"].includes(e))   { alert("Rispondi 'G' o 'A' per l'età");          return null; }
+  return { caffeina: c, sesso: s, eta: e };
+}
+
+// ── INVIO A GOOGLE SHEETS (GET — evita blocchi CORS) ──
+function inviaDati(dato) {
+  const status = document.getElementById("sendStatus");
+  status.textContent = "⏳ Invio dati in corso…";
+  status.className   = "";
+
+  // Costruisce URL con parametri GET
+  const params = new URLSearchParams(dato).toString();
+  const url    = APPS_SCRIPT_URL + "?" + params;
+
+  // no-cors necessario con GET verso Apps Script da browser
+  fetch(url, { method: "GET", mode: "no-cors" })
+    .then(() => {
+      status.textContent = "✅ Dati inviati a Google Sheets!";
+      status.className   = "ok";
+    })
+    .catch(err => {
+      console.error("Errore invio:", err);
+      status.textContent = "⚠️ Invio fallito — salva i dati col CSV";
+      status.className   = "err";
+    });
+}
+
+// ── DOWNLOAD CSV ──
+function downloadCSV() {
+  if (!dati.length) return;
+  let csv = "tempo,direzione,inputVisivi,caffeina,sesso,eta,timestamp\n";
+  dati.forEach(r => {
+    csv += `${r.tempo},${r.direzione},${r.inputVisivi},${r.caffeina},${r.sesso},${r.eta},"${r.timestamp}"\n`;
+  });
+  const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement("a");
+  a.href     = url;
+  a.download = "risultati_doe.csv";
+  a.click();
+  URL.revokeObjectURL(url);
+}
+</script>
+</body>
+</html>
