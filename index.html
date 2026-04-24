@@ -43,6 +43,32 @@
     padding: 28px 24px;
   }
 
+  /* ─── SELETTORE LINGUA ─── */
+  .lang-selector {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+  .lang-btn {
+    padding: 5px 13px;
+    border: 1.5px solid var(--border);
+    border-radius: 99px;
+    background: white;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.15s;
+  }
+  .lang-btn:hover { border-color: var(--primary); color: var(--primary); }
+  .lang-btn.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+  }
+
   /* ─── INTRO ─── */
   .intro-title {
     font-size: 22px;
@@ -135,7 +161,6 @@
   .btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); }
   .btn-primary:active { transform: translateY(0); }
 
-  /* sticky start */
   .btn-sticky {
     position: fixed;
     bottom: 16px;
@@ -158,7 +183,6 @@
   }
   .btn-sticky:hover { background: var(--primary-dark); }
 
-  /* ─── INFO CONDIZIONE ─── */
   #info {
     font-size: 14px;
     font-weight: 600;
@@ -171,46 +195,27 @@
     white-space: pre-line;
   }
 
-  /* ─── PROGRESS ─── */
-  #progressContainer {
-    margin-bottom: 16px;
-    display: none;
-  }
+  #progressContainer { margin-bottom: 16px; display: none; }
   #progressBar {
-    width: 100%;
-    height: 7px;
-    background: var(--border);
-    border-radius: 99px;
-    overflow: hidden;
-    margin-bottom: 5px;
+    width: 100%; height: 7px;
+    background: var(--border); border-radius: 99px; overflow: hidden; margin-bottom: 5px;
   }
   #progressFill {
-    height: 100%;
-    width: 0%;
+    height: 100%; width: 0%;
     background: linear-gradient(90deg, var(--primary), #6b94ff);
-    border-radius: 99px;
-    transition: width 0.22s ease-out;
+    border-radius: 99px; transition: width 0.22s ease-out;
   }
-  #progressText {
-    font-size: 13px;
-    color: var(--muted);
-    font-weight: 500;
-  }
+  #progressText { font-size: 13px; color: var(--muted); font-weight: 500; }
 
-  /* ─── GRIGLIA ─── */
   #instruction {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--muted);
-    margin-bottom: 12px;
-    text-align: center;
+    font-size: 15px; font-weight: 600; color: var(--muted);
+    margin-bottom: 12px; text-align: center;
   }
 
   #grid {
     display: grid;
     grid-template-columns: repeat(10, 1fr);
-    gap: 6px;
-    margin-bottom: 16px;
+    gap: 6px; margin-bottom: 16px;
   }
 
   .num-btn {
@@ -218,12 +223,9 @@
     font-size: 15px;
     font-family: 'DM Mono', monospace;
     font-weight: 500;
-    border: none;
-    border-radius: 9px;
-    background: var(--number-bg);
-    color: var(--text);
-    cursor: pointer;
-    transition: background 0.14s, transform 0.1s;
+    border: none; border-radius: 9px;
+    background: var(--number-bg); color: var(--text);
+    cursor: pointer; transition: background 0.14s, transform 0.1s;
   }
   .num-btn:hover { background: var(--number-hover); transform: scale(1.07); }
   .num-btn:active { transform: scale(0.97); }
@@ -234,85 +236,50 @@
     .card { padding: 18px 14px; }
   }
 
-  /* ─── AREA FINALE ─── */
   #finalArea { display: none; margin-top: 10px; }
 
   .congrats-msg {
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 20px;
-    text-align: center;
+    font-size: 20px; font-weight: 700;
+    color: var(--text); margin-bottom: 20px; text-align: center;
   }
 
-  /* ─── FORM RISPOSTE ─── */
   #finalQuestions {
-    background: #f5f7fb;
-    padding: 18px;
-    border-radius: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+    background: #f5f7fb; padding: 18px; border-radius: 12px;
+    display: flex; flex-direction: column; gap: 12px;
   }
   .field-group label {
-    display: block;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text);
-    margin-bottom: 5px;
+    display: block; font-size: 14px; font-weight: 600;
+    color: var(--text); margin-bottom: 5px;
   }
   .field-group input {
-    width: 100%;
-    padding: 10px 12px;
-    border: 1.5px solid var(--border);
-    border-radius: 8px;
-    font-size: 15px;
-    font-family: 'DM Sans', sans-serif;
-    color: var(--text);
-    background: white;
-    transition: border-color 0.15s;
+    width: 100%; padding: 10px 12px;
+    border: 1.5px solid var(--border); border-radius: 8px;
+    font-size: 15px; font-family: 'DM Sans', sans-serif;
+    color: var(--text); background: white; transition: border-color 0.15s;
   }
-  .field-group input:focus {
-    outline: none;
-    border-color: var(--primary);
-  }
+  .field-group input:focus { outline: none; border-color: var(--primary); }
 
-  /* ─── PANEL RISULTATO ─── */
   #panel {
-    display: none;
-    margin-top: 20px;
-    background: #eef2ff;
-    border-radius: 12px;
-    padding: 20px;
-    text-align: center;
+    display: none; margin-top: 20px;
+    background: #eef2ff; border-radius: 12px; padding: 20px; text-align: center;
   }
   #finalTime {
-    font-size: 26px;
-    font-weight: 700;
-    color: var(--primary-dark);
-    margin-bottom: 16px;
+    font-size: 26px; font-weight: 700;
+    color: var(--primary-dark); margin-bottom: 16px;
     font-family: 'DM Mono', monospace;
   }
   #sendStatus {
-    font-size: 14px;
-    font-weight: 500;
-    margin-bottom: 14px;
-    min-height: 20px;
-    color: var(--muted);
+    font-size: 14px; font-weight: 500;
+    margin-bottom: 14px; min-height: 20px; color: var(--muted);
   }
   #sendStatus.ok { color: var(--success); }
   #sendStatus.err { color: var(--accent); }
 
   .btn-download {
-    width: 100%;
-    padding: 13px;
+    width: 100%; padding: 13px;
     background: linear-gradient(135deg, #1a9e4a, #22c55e);
-    color: white;
-    border: none;
-    border-radius: 12px;
-    font-size: 16px;
-    font-weight: 700;
-    cursor: pointer;
+    color: white; border: none; border-radius: 12px;
+    font-size: 16px; font-weight: 700; cursor: pointer;
     font-family: 'DM Sans', sans-serif;
     box-shadow: 0 4px 12px rgba(26,158,74,0.22);
     transition: opacity 0.15s;
@@ -321,46 +288,40 @@
 </style>
 </head>
 <body>
-
 <div class="card">
 
   <!-- ══ INTRO ══ -->
   <div id="intro">
-    <h2 class="intro-title">📋 Regole del Test</h2>
 
-    <ul class="rules-list">
-      <li>Premi i numeri nell'ordine richiesto</li>
-      <li>Cerca di essere il più veloce possibile</li>
-      <li>Evita distrazioni durante il test</li>
-      <li>Il cronometro parte al primo clic sul numero</li>
-      <li>Non interrompere una volta iniziato</li>
-      <li>Al termine del test, premi "Conferma risposte" per inviare i risultati. Il pulsante "Scarica dati" è opzionale</li>
-      <li>Attendi che i dati vengano inviati prima di chiudere il test</li> 
-    </ul>
-
-    <div class="conditions-box">
-      <strong>Condizioni sperimentali:</strong><br>
-      • Input visivi: Si / No<br>
-      • Ordine: Crescente (1→50) o Decrescente (50→1)
+    <!-- Selettore lingua -->
+    <div class="lang-selector">
+      <button class="lang-btn active" onclick="setLang('it')">🇮🇹 IT</button>
+      <button class="lang-btn"        onclick="setLang('en')">🇬🇧 EN</button>
+      <button class="lang-btn"        onclick="setLang('es')">🇪🇸 ES</button>
     </div>
+
+    <h2 class="intro-title" id="lblTitle">📋 Regole del Test</h2>
+
+    <ul class="rules-list" id="rulesList"></ul>
+
+    <div class="conditions-box" id="lblConditions"></div>
 
     <div class="legend-box">
       <div class="legend-item">
         <div class="sample-std">7</div>
-        Input visivo Standard
+        <span id="lblStandard"></span>
       </div>
       <div class="legend-item">
         <div class="sample-alt">7</div>
-        Input visivo Alterato
+        <span id="lblAltered"></span>
       </div>
     </div>
 
-    <button class="btn-sticky" onclick="showTest()">Inizia test →</button>
+    <button class="btn-sticky" id="btnStartIntro" onclick="showTest()"></button>
   </div>
 
   <!-- ══ FASE TEST ══ -->
   <div id="testPhase" style="display:none;">
-
     <div id="info"></div>
 
     <div id="progressContainer">
@@ -368,44 +329,38 @@
       <p id="progressText"></p>
     </div>
 
-    <button class="btn-primary" id="startBtn" onclick="startTest()" style="display:none; margin-bottom:16px;">
-      ▶ Avvia numerazione
-    </button>
+    <button class="btn-primary" id="startBtn" onclick="startTest()" style="display:none; margin-bottom:16px;"></button>
 
     <div id="test" style="display:none;">
       <p id="instruction"></p>
       <div id="grid"></div>
     </div>
 
-    <!-- ── AREA FINALE ── -->
+    <!-- Area finale -->
     <div id="finalArea">
-
       <p class="congrats-msg" id="congrats"></p>
 
-      <!-- Form domande finali -->
       <div id="finalQuestions">
         <div class="field-group">
-          <label>Hai assunto caffeina nelle ultime 2 ore?</label>
-          <input id="caffeinaInput" type="text" maxlength="3" placeholder="si / no">
+          <label id="lblCaffeina"></label>
+          <input id="caffeinaInput" type="text" maxlength="3">
         </div>
         <div class="field-group">
-          <label>Sesso</label>
+          <label id="lblSesso"></label>
           <input id="sessoInput" type="text" maxlength="1" placeholder="M / F">
         </div>
         <div class="field-group">
-          <label>Età <span style="font-weight:400; color:var(--muted)">(G = ≤30 anni · A = >30 anni)</span></label>
-          <input id="etaInput" type="text" maxlength="1" placeholder="G / A">
+          <label id="lblEta"></label>
+          <input id="etaInput" type="text" maxlength="1">
         </div>
-        <button class="btn-primary" id="confirmAnswers">Conferma risposte</button>
+        <button class="btn-primary" id="confirmAnswers"></button>
       </div>
 
-      <!-- Panel risultato -->
       <div id="panel">
         <div id="finalTime"></div>
         <div id="sendStatus"></div>
-        <button class="btn-download" onclick="downloadCSV()">📥 Scarica dati CSV</button>
+        <button class="btn-download" onclick="downloadCSV()" id="btnDownload"></button>
       </div>
-
     </div>
   </div>
 
@@ -413,9 +368,139 @@
 
 <script>
 // ══════════════════════════════════════════════
-//  CONFIGURAZIONE — incolla qui il tuo URL Apps Script
-// ══════════════════════════════════════════════
 const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxV9U0dpV0lF2gCcG_yJPnPPuZTB-gQTI3J9Rl4u7pGUk7Gane_hfHqgWzPOVmVAg8f/exec";
+
+// ══════════════════════════════════════════════
+//  TRADUZIONI
+// ══════════════════════════════════════════════
+const T = {
+  it: {
+    title:       "📋 Regole del Test",
+    rules: [
+      "Premi i numeri nell'ordine richiesto",
+      "Cerca di essere il più veloce possibile",
+      "Evita distrazioni durante il test",
+      "Il cronometro parte al primo clic sul numero",
+      "Non interrompere una volta iniziato",
+      "Al termine premi \"Conferma risposte\" per inviare i risultati. Il pulsante \"Scarica dati\" è opzionale",
+      "Attendi che i dati vengano inviati prima di chiudere"
+    ],
+    conditions:  "<strong>Condizioni sperimentali:</strong><br>• Input visivi: Si / No<br>• Ordine: Crescente (1→50) o Decrescente (50→1)",
+    lblStandard: "Input visivo Standard",
+    lblAltered:  "Input visivo Alterato",
+    btnStart:    "Inizia test →",
+    btnAvvia:    "▶ Avvia numerazione",
+    infoVisivi:  "Sì",
+    infoNo:      "No",
+    infoLabel:   "Condizione assegnata:\nInput visivi: {v}\nOrdine: {o}",
+    orderUp:     "Crescente (1 → 50)",
+    orderDown:   "Decrescente (50 → 1)",
+    instrUp:     "Trova i numeri da 1 a 50 in ordine crescente",
+    instrDown:   "Trova i numeri da 50 a 1 in ordine decrescente",
+    progressNone:"Nessun numero ancora cliccato",
+    progressTxt: "Progresso: {c}/{t} – ultimo numero: {n}",
+    congrats:    "🎉 Ottimo lavoro! Test completato.",
+    lblCaffeina: "Hai assunto caffeina nelle ultime 2 ore?",
+    caffPlaceholder: "si / no",
+    lblSesso:    "Sesso",
+    lblEta:      "Età (G = ≤30 anni · A = >30 anni)",
+    etaPlaceholder: "G / A",
+    btnConferma: "Conferma risposte",
+    errCaffeina: "Rispondi 'si' o 'no' per la caffeina",
+    errSesso:    "Rispondi 'M' o 'F' per il sesso",
+    errEta:      "Rispondi 'G' o 'A' per l'età",
+    sending:     "⏳ Invio dati in corso…",
+    sent:        "✅ Dati inviati a Google Sheets!",
+    sendErr:     "⚠️ Invio fallito — salva i dati col CSV",
+    btnDownload: "📥 Scarica dati CSV",
+    caffValues:  ["si","no"],
+    etaValues:   ["g","a"],
+  },
+  en: {
+    title:       "📋 Test Rules",
+    rules: [
+      "Press the numbers in the required order",
+      "Try to be as fast as possible",
+      "Avoid distractions during the test",
+      "The timer starts on your first click",
+      "Do not stop once you have started",
+      "When finished, press \"Confirm answers\" to send results. The \"Download data\" button is optional",
+      "Wait for the data to be sent before closing"
+    ],
+    conditions:  "<strong>Experimental conditions:</strong><br>• Visual inputs: Yes / No<br>• Order: Ascending (1→50) or Descending (50→1)",
+    lblStandard: "Standard visual input",
+    lblAltered:  "Altered visual input",
+    btnStart:    "Start test →",
+    btnAvvia:    "▶ Begin sequence",
+    infoVisivi:  "Yes",
+    infoNo:      "No",
+    infoLabel:   "Assigned condition:\nVisual inputs: {v}\nOrder: {o}",
+    orderUp:     "Ascending (1 → 50)",
+    orderDown:   "Descending (50 → 1)",
+    instrUp:     "Find the numbers from 1 to 50 in ascending order",
+    instrDown:   "Find the numbers from 50 to 1 in descending order",
+    progressNone:"No number clicked yet",
+    progressTxt: "Progress: {c}/{t} – last number: {n}",
+    congrats:    "🎉 Great job! Test completed.",
+    lblCaffeina: "Have you consumed caffeine in the last 2 hours?",
+    caffPlaceholder: "yes / no",
+    lblSesso:    "Sex",
+    lblEta:      "Age (Y = ≤30 years · O = >30 years)",
+    etaPlaceholder: "Y / O",
+    btnConferma: "Confirm answers",
+    errCaffeina: "Answer 'yes' or 'no' for caffeine",
+    errSesso:    "Answer 'M' or 'F' for sex",
+    errEta:      "Answer 'Y' or 'O' for age",
+    sending:     "⏳ Sending data…",
+    sent:        "✅ Data sent to Google Sheets!",
+    sendErr:     "⚠️ Send failed — save data with CSV",
+    btnDownload: "📥 Download CSV data",
+    caffValues:  ["yes","no"],
+    etaValues:   ["y","o"],
+  },
+  es: {
+    title:       "📋 Reglas del Test",
+    rules: [
+      "Pulsa los números en el orden requerido",
+      "Intenta ser lo más rápido posible",
+      "Evita distracciones durante el test",
+      "El cronómetro arranca con el primer clic",
+      "No interrumpas una vez comenzado",
+      "Al terminar pulsa \"Confirmar respuestas\" para enviar los resultados. El botón \"Descargar datos\" es opcional",
+      "Espera a que los datos se envíen antes de cerrar"
+    ],
+    conditions:  "<strong>Condiciones experimentales:</strong><br>• Entradas visuales: Sí / No<br>• Orden: Ascendente (1→50) o Descendente (50→1)",
+    lblStandard: "Entrada visual estándar",
+    lblAltered:  "Entrada visual alterada",
+    btnStart:    "Comenzar test →",
+    btnAvvia:    "▶ Iniciar secuencia",
+    infoVisivi:  "Sí",
+    infoNo:      "No",
+    infoLabel:   "Condición asignada:\nEntradas visuales: {v}\nOrden: {o}",
+    orderUp:     "Ascendente (1 → 50)",
+    orderDown:   "Descendente (50 → 1)",
+    instrUp:     "Encuentra los números del 1 al 50 en orden ascendente",
+    instrDown:   "Encuentra los números del 50 al 1 en orden descendente",
+    progressNone:"Ningún número pulsado aún",
+    progressTxt: "Progreso: {c}/{t} – último número: {n}",
+    congrats:    "🎉 ¡Buen trabajo! Test completado.",
+    lblCaffeina: "¿Has tomado cafeína en las últimas 2 horas?",
+    caffPlaceholder: "si / no",
+    lblSesso:    "Sexo",
+    lblEta:      "Edad (J = ≤30 años · M = >30 años)",
+    etaPlaceholder: "J / M",
+    btnConferma: "Confirmar respuestas",
+    errCaffeina: "Responde 'si' o 'no' para la cafeína",
+    errSesso:    "Responde 'M' o 'F' para el sexo",
+    errEta:      "Responde 'J' o 'M' para la edad",
+    sending:     "⏳ Enviando datos…",
+    sent:        "✅ ¡Datos enviados a Google Sheets!",
+    sendErr:     "⚠️ Envío fallido — guarda los datos con CSV",
+    btnDownload: "📥 Descargar datos CSV",
+    caffValues:  ["si","no"],
+    etaValues:   ["j","m"],
+  }
+};
 
 // ══════════════════════════════════════════════
 const colori    = ["red","blue","green","#7b00d4","#e07b00"];
@@ -423,49 +508,91 @@ const dimensioni= ["16px","20px","26px","32px","40px"];
 const fonts     = ["Arial","Courier New","Georgia","Verdana","Tahoma"];
 const TOTALE    = 50;
 
+let lang      = "it";
 let startTime = null;
 let current;
 let condizione;
 let dati = [];
 
-// Assegna condizione al caricamento
+// ── Imposta lingua ──
+function setLang(l) {
+  lang = l;
+  document.querySelectorAll(".lang-btn").forEach(b => b.classList.remove("active"));
+  document.querySelectorAll(".lang-btn")[["it","en","es"].indexOf(l)].classList.add("active");
+  renderIntro();
+}
+
+function renderIntro() {
+  const t = T[lang];
+  document.getElementById("lblTitle").textContent = t.title;
+
+  const ul = document.getElementById("rulesList");
+  ul.innerHTML = "";
+  t.rules.forEach(r => {
+    const li = document.createElement("li");
+    li.textContent = r;
+    ul.appendChild(li);
+  });
+
+  document.getElementById("lblConditions").innerHTML  = t.conditions;
+  document.getElementById("lblStandard").textContent  = t.lblStandard;
+  document.getElementById("lblAltered").textContent   = t.lblAltered;
+  document.getElementById("btnStartIntro").textContent = t.btnStart;
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   condizione = {
     direzione:   Math.random() < 0.5 ? "up" : "down",
     inputVisivi: Math.random() < 0.5 ? "no"  : "si"
   };
+  renderIntro();
 });
 
+// ── Mostra fase test ──
 function showTest() {
+  const t = T[lang];
   document.getElementById("intro").style.display     = "none";
   document.getElementById("testPhase").style.display = "block";
-  document.getElementById("startBtn").style.display  = "block";
 
-  const info = document.getElementById("info");
-  info.innerText =
-    "Condizione assegnata:\n" +
-    "Input visivi: " + (condizione.inputVisivi === "si" ? "Sì" : "No") + "\n" +
-    "Ordine: " + (condizione.direzione === "up"
-      ? "Crescente (1 → 50)"
-      : "Decrescente (50 → 1)");
+  const startBtn = document.getElementById("startBtn");
+  startBtn.textContent   = t.btnAvvia;
+  startBtn.style.display = "block";
+
+  const v = condizione.inputVisivi === "si" ? t.infoVisivi : t.infoNo;
+  const o = condizione.direzione   === "up" ? t.orderUp    : t.orderDown;
+  document.getElementById("info").innerText =
+    t.infoLabel.replace("{v}", v).replace("{o}", o);
+
+  // Prepara label form finale
+  document.getElementById("lblCaffeina").textContent     = t.lblCaffeina;
+  document.getElementById("caffeinaInput").placeholder   = t.caffPlaceholder;
+  document.getElementById("lblSesso").textContent        = t.lblSesso;
+  document.getElementById("lblEta").innerHTML =
+    'Età <span style="font-weight:400;color:var(--muted)">' + t.lblEta.split("(")[1].replace(")", "") + "</span>";
+  if (lang !== "it") {
+    document.getElementById("lblEta").innerHTML =
+      t.lblEta.split("(")[0] +
+      '<span style="font-weight:400;color:var(--muted)">(' + t.lblEta.split("(")[1] + "</span>";
+  }
+  document.getElementById("etaInput").placeholder        = t.etaPlaceholder;
+  document.getElementById("confirmAnswers").textContent  = t.btnConferma;
+  document.getElementById("btnDownload").textContent     = t.btnDownload;
 }
 
 function startTest() {
-  document.getElementById("startBtn").style.display      = "none";
-  document.getElementById("test").style.display          = "block";
+  const t = T[lang];
+  document.getElementById("startBtn").style.display          = "none";
+  document.getElementById("test").style.display              = "block";
   document.getElementById("progressContainer").style.display = "block";
-  document.getElementById("progressFill").style.width    = "0%";
-  document.getElementById("progressText").innerText      = "Nessun numero ancora cliccato";
+  document.getElementById("progressFill").style.width        = "0%";
+  document.getElementById("progressText").innerText          = t.progressNone;
 
   startTime = null;
   current   = condizione.direzione === "up" ? 1 : 50;
 
   document.getElementById("instruction").innerText =
-    condizione.direzione === "up"
-      ? "Trova i numeri da 1 a 50 in ordine crescente"
-      : "Trova i numeri da 50 a 1 in ordine decrescente";
+    condizione.direzione === "up" ? t.instrUp : t.instrDown;
 
-  // Griglia
   const numeri = Array.from({length: 50}, (_, i) => i + 1).sort(() => Math.random() - 0.5);
   const grid   = document.getElementById("grid");
   grid.innerHTML = "";
@@ -486,30 +613,28 @@ function startTest() {
 
 function handleClick(n, btn) {
   if (n !== current) return;
+  const t = T[lang];
 
   if (startTime === null) startTime = performance.now();
-
   btn.style.visibility = "hidden";
 
   const cliccati = condizione.direzione === "up" ? n : (TOTALE + 1 - n);
   const percent  = (cliccati / TOTALE) * 100;
-  document.getElementById("progressFill").style.width  = percent + "%";
-  document.getElementById("progressText").innerText    =
-    "Progresso: " + cliccati + "/" + TOTALE + " – ultimo numero: " + n;
+  document.getElementById("progressFill").style.width = percent + "%";
+  document.getElementById("progressText").innerText   =
+    t.progressTxt.replace("{c}", cliccati).replace("{t}", TOTALE).replace("{n}", n);
 
   current = condizione.direzione === "up" ? current + 1 : current - 1;
 
-  // ── FINE TEST ──
   if (current === 51 || current === 0) {
     const tempo = ((performance.now() - startTime) / 1000).toFixed(2);
     window.tempoFinale = tempo;
 
-    document.getElementById("test").style.display          = "none";
+    document.getElementById("test").style.display              = "none";
     document.getElementById("progressContainer").style.display = "none";
-    document.getElementById("finalArea").style.display     = "block";
-    document.getElementById("congrats").innerHTML          = "🎉 Ottimo lavoro! Test completato.";
+    document.getElementById("finalArea").style.display         = "block";
+    document.getElementById("congrats").innerHTML              = t.congrats;
 
-    // Handler conferma risposte
     document.getElementById("confirmAnswers").onclick = function() {
       const risposte = validateFinalAnswers();
       if (!risposte) return;
@@ -521,67 +646,62 @@ function handleClick(n, btn) {
         caffeina:    risposte.caffeina,
         sesso:       risposte.sesso,
         eta:         risposte.eta,
+        lingua:      lang,
         timestamp:   new Date().toLocaleString("it-IT")
       };
       dati.push(record);
 
       document.getElementById("finalQuestions").style.display = "none";
       document.getElementById("panel").style.display          = "block";
-      document.getElementById("finalTime").innerHTML =
-        "⏱ " + window.tempoFinale + "s";
+      document.getElementById("finalTime").innerHTML          = "⏱ " + window.tempoFinale + "s";
 
       inviaDati(record);
     };
   }
 }
 
-// ── VALIDAZIONE ──
 function validateFinalAnswers() {
+  const t = T[lang];
   const c = document.getElementById("caffeinaInput").value.trim().toLowerCase();
   const s = document.getElementById("sessoInput").value.trim().toLowerCase();
   const e = document.getElementById("etaInput").value.trim().toLowerCase();
-  if (!["si","no"].includes(c)) { alert("Rispondi 'si' o 'no' per la caffeina"); return null; }
-  if (!["m","f"].includes(s))   { alert("Rispondi 'M' o 'F' per il sesso");      return null; }
-  if (!["g","a"].includes(e))   { alert("Rispondi 'G' o 'A' per l'età");          return null; }
+  if (!t.caffValues.includes(c)) { alert(t.errCaffeina); return null; }
+  if (!["m","f"].includes(s))    { alert(t.errSesso);    return null; }
+  if (!t.etaValues.includes(e))  { alert(t.errEta);      return null; }
   return { caffeina: c, sesso: s, eta: e };
 }
 
-// ── INVIO A GOOGLE SHEETS (GET — evita blocchi CORS) ──
 function inviaDati(dato) {
+  const t      = T[lang];
   const status = document.getElementById("sendStatus");
-  status.textContent = "⏳ Invio dati in corso…";
+  status.textContent = t.sending;
   status.className   = "";
 
-  // Costruisce URL con parametri GET
   const params = new URLSearchParams(dato).toString();
   const url    = APPS_SCRIPT_URL + "?" + params;
 
-  // no-cors necessario con GET verso Apps Script da browser
   fetch(url, { method: "GET", mode: "no-cors" })
     .then(() => {
-      status.textContent = "✅ Dati inviati a Google Sheets!";
+      status.textContent = t.sent;
       status.className   = "ok";
     })
     .catch(err => {
       console.error("Errore invio:", err);
-      status.textContent = "⚠️ Invio fallito — salva i dati col CSV";
+      status.textContent = t.sendErr;
       status.className   = "err";
     });
 }
 
-// ── DOWNLOAD CSV ──
 function downloadCSV() {
   if (!dati.length) return;
-  let csv = "tempo,direzione,inputVisivi,caffeina,sesso,eta,timestamp\n";
+  let csv = "tempo,direzione,inputVisivi,caffeina,sesso,eta,lingua,timestamp\n";
   dati.forEach(r => {
-    csv += `${r.tempo},${r.direzione},${r.inputVisivi},${r.caffeina},${r.sesso},${r.eta},"${r.timestamp}"\n`;
+    csv += `${r.tempo},${r.direzione},${r.inputVisivi},${r.caffeina},${r.sesso},${r.eta},${r.lingua},"${r.timestamp}"\n`;
   });
   const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
   const url  = URL.createObjectURL(blob);
   const a    = document.createElement("a");
-  a.href     = url;
-  a.download = "risultati_doe.csv";
-  a.click();
+  a.href = url; a.download = "risultati_doe.csv"; a.click();
   URL.revokeObjectURL(url);
 }
 </script>
