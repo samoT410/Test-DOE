@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>DOE Test Cognitivo</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+body {
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  padding: 15px;
+  background: #f0f2f7;
+  color: #1f2a44;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background: white;
+  padding: 18px;
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+/* INTRO */
+#intro h2 {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+#rules {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+#conditions {
+  margin-top: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #2d3e70;
+}
+
+.legend-box {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin-top: 15px;
+  margin-bottom: 80px;
+}
+
+.example {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.example span {
+  margin-top: 6px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.standard {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  background: #eaf1ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  font-family: Arial;
+  color: black;
+}
+
+.altered {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  background: #ffe8e8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+  font-family: 'Courier New';
+  color: red;
+}
+
+.sticky-start {
+  position: fixed;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 85%;
+  max-width: 400px;
+  z-index: 999;
+  padding: 14px 20px;
+  background: #2d6cdf;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+}
+
+/* TEST */
+#info {
+  white-space: pre-line;
+  margin: 8px 0 12px;
+  font-weight: 600;
+  color: #3a4a75;
+}
+
+#grid {
+  display: grid;
+  grid-template-columns: repeat(10, 44px);
+  gap: 6px;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+button.number {
+  width: 44px;
+  height: 44px;
+  font-size: 15px;
+  border: none;
+  border-radius: 8px;
+  background: #eaf1ff;
+  cursor: pointer;
+  transition: 0.15s;
+}
+
+button.number:hover {
+  background: #d6e4ff;
+  transform: scale(1.05);
+}
+
+@media (max-width: 600px) {
+  #grid {
+    grid-template-columns: repeat(5, 1fr);
+    margin-top: 8px !important;
+  }
+  button.number {
+    width: 100%;
+    height: 48px;
+    font-size: 18px;
+  }
+}
+
+/* PROGRESS BAR */
+#progressContainer {
+  width: 100%;
+  max-width: 500px;
+  margin: 8px auto 0 auto;
+  display: none;
+}
+
+#progressBar {
+  width: 100%;
+  height: 6px;
+  background: #e3e7f2;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+#progressFill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #2d6cdf, #4a8bff);
+  border-radius: 4px;
+  transition: width 0.25s ease-out;
+}
+
+#progressText {
+  margin-top: 4px;
+  font-size: 14px;
+  color: #3a4a75;
+}
+
+/* FINAL PANEL */
+
+#finalTime {
+  font-size: 20px;
+  font-weight: 700;
+  color: #2d3e70;
+  margin-bottom: 10px;
+}
+
+#download {
+  margin-top: 8px;
+  padding: 12px 20px;
+  font-size: 16px;
+  background-color: #1f8f3a;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 100%;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- INTRO -->
+<div id="intro">
+  <h2>Regole del Test</h2>
+
+  <p id="rules">
+    • Premi i numeri nell’ordine richiesto.<br>
+    • Cerca di essere veloce ma preciso.<br>
+    • Evita distrazioni durante il test.<br>
+    • Il cronometro partirà dopo aver premuto il primo numero.<br>
+    • Non interrompere una volta iniziato.<br>
+  </p>
+
+  <div id="conditions">
+    <strong>Condizioni sperimentali:</strong><br>
+    • Input visivi: Si / No<br>
+    • Ordine: Crescente (1→50) o Decrescente (50→1)
+  </div>
+
+  <div class="legend-box">
+    <div class="example">
+      <div class="standard">7</div>
+      <span>Input visivo Standard</span>
+    </div>
+
+    <div class="example">
+      <div class="altered">7</div>
+      <span>Input visivo Alterato</span>
+    </div>
+  </div>
+
+  <button class="sticky-start" onclick="showTest()">Inizia test</button>
+</div>
+
+<!-- TEST -->
+<p id="info" style="display:none;"></p>
+
+<div id="progressContainer">
+  <div id="progressBar">
+    <div id="progressFill"></div>
+  </div>
+  <p id="progressText"></p>
+</div>
+
+<button class="btn" id="startBtn" onclick="startTest()" style="
+   margin: 20px auto 0 auto;
+  padding: 12px 18px;
+  font-size: 18px;
+  border: none;
+  border-radius: 10px;
+  background: #2d6cdf;
+  color: white;
+  cursor: pointer;
+  display: none;
+  width: 60%;
+  max-width: 260px;
+  text-align: center;
+">Avvia numerazione</button>
+
+<div id="test" style="display:none;">
+  <p id="instruction"></p>
+  <div id="grid"></div>
+
+  <div id="finalArea" style="display:none; margin-top:20px;">
+
+    <p id="congrats" style="font-size:22px; font-weight:700; color:#2d3e70; margin-bottom:10px;"></p>
+    <p id="result" style="font-size:18px; font-weight:600; color:#2d3e70; margin-bottom:20px;"></p>
+    <div id="panel" style="
+  display:none;
+  margin-top:25px;
+  padding:18px;
+  background:#eef3ff;
+  border-radius:12px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+  text-align:center;
+">
+
+  <p id="finalTime" style="
+    font-size:20px;
+    font-weight:700;
+    color:#2d3e70;
+    margin-bottom:14px;
+  "></p>
+
+  <button id="download" onclick="downloadCSV()" style="
+    padding:14px 20px;
+    font-size:17px;
+    background:linear-gradient(135deg, #1f8f3a, #28b34f);
+    color:white;
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
+    width:100%;
+    font-weight:600;
+    letter-spacing:0.3px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.15);
+    font-family:'Poppins', sans-serif;
+  ">
+    📥 Scarica dati
+  </button>
+
+</div>
+
+    <div id="finalQuestions" style="background:#f5f7fb; padding:12px; border-radius:10px; text-align:left;">
+
+      <label style="font-weight:600;">Hai assunto caffeina nelle ultime 2 ore? (si/no)</label>
+      <input id="caffeinaInput" type="text" maxlength="3" style="width:100%; padding:8px; margin:6px 0 12px 0; border:1px solid #c9d2e3; border-radius:8px; font-size:15px;">
+
+      <label style="font-weight:600;">Sesso (M/F)</label>
+      <input id="sessoInput" type="text" maxlength="1" style="width:100%; padding:8px; margin:6px 0 12px 0; border:1px solid #c9d2e3; border-radius:8px; font-size:15px;">
+
+      <label style="font-weight:600;">Età (G = ≤30, A = >30)</label>
+      <input id="etaInput" type="text" maxlength="1" style="width:100%; padding:8px; margin:6px 0 12px 0; border:1px solid #c9d2e3; border-radius:8px; font-size:15px;">
+
+      <button id="confirmAnswers" style="margin-top:5px; padding:10px 20px; background:#2d6cdf; color:white; border:none; border-radius:10px; cursor:pointer; width:100%; font-size:16px;">Conferma risposte</button>
+
+    </div>
+
+  </div>
+</div>
+
+<!-- FINAL PANEL -->
+<div id="panel" style="
+  display:none;
+  margin-top:25px;
+  padding:18px;
+  background:#eef3ff;
+  border-radius:12px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+">
+
+  <p id="finalTime" style="
+    font-size:20px;
+    font-weight:700;
+    color:#2d3e70;
+    margin-bottom:12px;
+  "></p>
+
+  <button id="download" onclick="downloadCSV()" style="
+    padding:14px 20px;
+    font-size:17px;
+    background:linear-gradient(135deg, #1f8f3a, #28b34f);
+    color:white;
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
+    width:100%;
+    font-weight:600;
+    letter-spacing:0.3px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.15);
+  ">
+    📥 Scarica dati
+  </button>
+
+</div>
+
+
+</div>
+<script>
+
+function showTest() {
+  document.getElementById("intro").style.display = "none";
+  document.getElementById("info").style.display = "block";
+  document.getElementById("startBtn").style.display = "block";
+}
+
+let startTime = null;
+let current;
+let dati = [];
+let condizione;
+
+const colori = ["red", "blue", "green", "black", "purple", "orange"];
+const dimensioni = ["16px", "20px", "26px", "32px", "40px"];
+const fontFamily = ["Arial", "Courier New", "Georgia", "Verdana", "Tahoma"];
+const totaleNumeri = 50;
+
+/* VALIDATORE */
+function validateFinalAnswers() {
+  let c = caffeinaInput.value.trim().toLowerCase();
+  let s = sessoInput.value.trim().toLowerCase();
+  let e = etaInput.value.trim().toLowerCase();
+
+  if (!["si","no"].includes(c)) { alert("Rispondi 'si' o 'no' per la caffeina"); return null; }
+  if (!["m","f"].includes(s)) { alert("Rispondi 'M' o 'F' per il sesso"); return null; }
+  if (!["g","a"].includes(e)) { alert("Rispondi 'G' o 'A' per l'età"); return null; }
+
+  return { caffeina: c, sesso: s, eta: e };
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  condizione = {
+    direzione: Math.random() < 0.5 ? "up" : "down",
+    inputVisivi: Math.random() < 0.5 ? "no" : "si"
+  };
+
+  setTimeout(() => {
+    info.innerText =
+      "Condizione assegnata:\n" +
+      "Input visivi: " + (condizione.inputVisivi === "si" ? "Sì" : "No") + "\n" +
+      "Ordine: " + (condizione.direzione === "up"
+                    ? "Crescente (1 → 50)"
+                    : "Decrescente (50 → 1)");
+  }, 50);
+
+});
+
+function startTest() {
+
+  startBtn.style.display = "none";
+  test.style.display = "block";
+
+  progressContainer.style.display = "block";
+  progressFill.style.width = "0%";
+  progressText.innerText = "Inizio: nessun numero ancora cliccato";
+
+  startTime = null;
+  current = condizione.direzione === "up" ? 1 : 50;
+
+  instruction.innerText =
+    condizione.direzione === "up"
+      ? "Trova i numeri da 1 a 50 in ordine crescente"
+      : "Trova i numeri da 50 a 1 in ordine decrescente";
+
+  let numeri = Array.from({length:50}, (_,i)=>i+1)
+    .sort(() => Math.random() - 0.5);
+
+  grid.innerHTML = "";
+
+  numeri.forEach(n => {
+    let btn = document.createElement("button");
+    btn.innerText = n;
+    btn.className = "number";
+
+    if (condizione.inputVisivi === "si") {
+        btn.style.color = colori[Math.floor(Math.random() * colori.length)];
+        btn.style.fontSize = dimensioni[Math.floor(Math.random() * dimensioni.length)];
+        btn.style.fontFamily = fontFamily[Math.floor(Math.random() * fontFamily.length)];
+    }
+
+    btn.onclick = () => handleClick(n, btn);
+    grid.appendChild(btn);
+  });
+}
+
+function handleClick(n, btn) {
+
+  if (n === current) {
+
+    if (startTime === null) startTime = performance.now();
+
+    btn.style.visibility = "hidden";
+
+    let cliccati = condizione.direzione === "up" ? n : (totaleNumeri + 1) - n;
+    let percent = (cliccati / totaleNumeri) * 100;
+
+    progressFill.style.width = percent + "%";
+    progressText.innerText =
+      "Progresso: " + cliccati + "/" + totaleNumeri +
+      " – ultimo numero cliccato: " + n;
+
+    current = condizione.direzione === "up" ? current + 1 : current - 1;
+
+    if (current === 51 || current === 0) {
+
+      let tempo = ((performance.now() - startTime)/1000).toFixed(2);
+      window.tempoFinale = tempo;
+
+      grid.style.display = "none";
+      instruction.style.display = "none";
+      progressContainer.style.display = "none";
+
+      finalArea.style.display = "block";
+      congrats.innerHTML = "🎉 Ottimo lavoro! Test completato con successo!";
+      result.innerText = "";
+
+      confirmAnswers.onclick = function() {
+        console.log("CLICK CONFERMA");
+        alert("CLICK CONFERMA");
+        let risposte = validateFinalAnswers();
+        if (!risposte) return;
+
+        result.innerText = "Tempo: " + window.tempoFinale + " secondi";
+
+        dati.push({
+          tempo: window.tempoFinale,
+          direzione: condizione.direzione,
+          inputVisivi: condizione.inputVisivi,
+          caffeina: risposte.caffeina,
+          sesso: risposte.sesso,
+          eta: risposte.eta,
+          timestamp: new Date().toLocaleString()
+        });
+
+        inviaDatiOnline({
+          tempo: window.tempoFinale,
+          direzione: condizione.direzione,
+          inputVisivi: condizione.inputVisivi,
+          caffeina: risposte.caffeina,
+          sesso: risposte.sesso,
+          eta: risposte.eta,
+          timestamp: new Date().toLocaleString()
+        });
+
+        finalQuestions.style.display = "none";
+
+        finalTime.innerHTML = "⏱️ Tempo totale: <strong>" + window.tempoFinale + "s</strong>";
+        document.getElementById("panel").style.display = "block";
+;
+      };
+    }
+  }
+}
+
+function downloadCSV() {
+
+  let csv = "tempo,direzione,inputVisivi,caffeina,sesso,eta,timestamp\n";
+
+  dati.forEach(r => {
+    csv += `${r.tempo},${r.direzione},${r.inputVisivi},${r.caffeina},${r.sesso},${r.eta},${r.timestamp}\n`;
+  });
+
+  let blob = new Blob([csv], { type: "text/csv" });
+  let url = URL.createObjectURL(blob);
+
+  let a = document.createElement("a");
+  a.href = url;
+  a.download = "risultati_test.csv";
+  a.click();
+
+  URL.revokeObjectURL(url);
+}
+
+function inviaDatiOnline(dato) {
+  fetch("https://script.google.com/macros/s/AKfycbwOiWa2i7GQ4eel15z5Mei5rm_kp-n3MjqhcmNRn-uydRKSWvuatDp9kd75amhs5ema/exec", {
+    method: "POST",
+    body: new URLSearchParams(dato)
+  })
+  .then(r => r.text())
+  .then(r => console.log("OK INVIO:", r))
+  .catch(e => console.log("ERRORE INVIO:", e));
+}
+</script>
+</body>
+</html>  
